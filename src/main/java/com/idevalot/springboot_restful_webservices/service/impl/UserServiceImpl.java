@@ -27,9 +27,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserById(Long id) {
+    public UserDto getUserById(Long id) {
         Optional<User> optionalUser = userRepository.findById(id);
-        return optionalUser.get();
+        if (!optionalUser.isPresent()) {
+            throw new RuntimeException("User not found");
+        }
+        User user = optionalUser.get();
+
+        return UserMapper.mapToUserDto(user);
     }
     @Override
     public List<User> getAllUsers() {
