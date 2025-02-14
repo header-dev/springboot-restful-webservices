@@ -1,5 +1,6 @@
 package com.idevalot.springboot_restful_webservices.controller;
 
+import com.idevalot.springboot_restful_webservices.dto.UserDto;
 import com.idevalot.springboot_restful_webservices.entity.User;
 import com.idevalot.springboot_restful_webservices.service.UserService;
 import lombok.AllArgsConstructor;
@@ -17,8 +18,8 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        User savedUser = userService.createUser(user);
+    public ResponseEntity<UserDto> createUser(@RequestBody UserDto user) {
+        UserDto savedUser = userService.createUser(user);
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
 

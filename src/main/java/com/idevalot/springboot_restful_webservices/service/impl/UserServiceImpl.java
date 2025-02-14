@@ -1,6 +1,8 @@
 package com.idevalot.springboot_restful_webservices.service.impl;
 
+import com.idevalot.springboot_restful_webservices.dto.UserDto;
 import com.idevalot.springboot_restful_webservices.entity.User;
+import com.idevalot.springboot_restful_webservices.mapper.UserMapper;
 import com.idevalot.springboot_restful_webservices.repository.UserRepository;
 import com.idevalot.springboot_restful_webservices.service.UserService;
 import lombok.AllArgsConstructor;
@@ -16,8 +18,12 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
-    public User createUser(User user) {
-        return userRepository.save(user);
+    public UserDto createUser(UserDto userDto) {
+        //Covert UserDto to User JPA Entity
+        User user = UserMapper.mapToUser(userDto);
+        User savedUser = userRepository.save(user);
+        // Convert User JPA Entity to UserDto
+        return UserMapper.mapToUserDto(savedUser);
     }
 
     @Override
