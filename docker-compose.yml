@@ -25,6 +25,7 @@ services:
       - spring-mysql-net
     volumes:
       - db_data:/var/lib/mysql
+    network_mode: host
 volumes:
   db_data:
 
