@@ -5,6 +5,7 @@ import com.idevalot.springboot_restful_webservices.entity.User;
 import com.idevalot.springboot_restful_webservices.exception.ErrorDetails;
 import com.idevalot.springboot_restful_webservices.exception.ResourceNotFoundException;
 import com.idevalot.springboot_restful_webservices.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -34,6 +35,10 @@ public class UserController {
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
+    @Operation(
+            summary = "Get All Users REST API",
+            description = "Get All Users REST API is used to get a all the users from the database"
+    )
     @GetMapping
     public ResponseEntity<List<UserDto>> getAllUsers() {
         List<UserDto> users = userService.getAllUsers();
